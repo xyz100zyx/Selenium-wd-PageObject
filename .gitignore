@@ -1,0 +1,6 @@
+/node_modules
+/log
+/.idea
+
+local.log
+browserstack.err

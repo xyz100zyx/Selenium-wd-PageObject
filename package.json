@@ -1,0 +1,19 @@
+{
+  "name": "lab9",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.js",
+    "sample-test": "browserstack-node-sdk mocha test/**/*.js --timeout=60000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserstack-local": "^1.4.8",
+    "selenium-webdriver": "4.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "browserstack-node-sdk": "latest"
+  }
+}
