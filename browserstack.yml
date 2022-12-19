@@ -1,5 +1,5 @@
-userName: artyomkarpinchic_9r0Ccg
-accessKey: pvZFDwgeW9nh8vr6dH6o
+userName: artyomxyzrt_0DCbSL
+accessKey: s99of1MvzGdyRgvEhLtS
 platforms:
   - os: Windows
     osVersion: 11
@@ -10,5 +10,5 @@ browserstackLocal: true
 buildName: browserstack-build-1
 projectName: BrowserStack Sample
 debug: false
-networkLogs: false
+networkLogs: true
 consoleLogs: errors

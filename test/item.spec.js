@@ -1,41 +1,63 @@
-const { Builder, Capabilities, By  } = require("selenium-webdriver");
-const { assert } = require("assert");
+const { Builder, Capabilities } = require("selenium-webdriver");
+const  assert  = require("assert");
 const should = require("chai").should();
 const ItemPage = require("../pages/ItemPage");
 
-describe("Add item to cart", function() {
-  const url = `https://www.stoneisland.com/us/stone-island/vest_cod16115677su.html#dept=ctsndjck`;
+describe("Add item to cart", function () {
+  const url = `https://www.fjallraven.com/eu/en-gb/men/jackets/winter-jackets/expedition-pack-down-hoodie-m?v=F86121%3a%3a7323450796235`;
 
   beforeEach(async function () {
     const capabilities = {
       ...Capabilities.chrome(),
     };
-    this.driver = await new Builder().usingServer("http://localhost:4444/wd/hub").withCapabilities(capabilities).build();
+    this.driver = await new Builder()
+      .usingServer("http://localhost:4444/wd/hub")
+      .withCapabilities(capabilities)
+      .build();
     await this.driver.manage().window().maximize();
   });
 
-
-  it("Choose a size of item", async function() {
+  it("Choose a size of item", async function () {
+    //console.log('first test runned')
     const itemPage = new ItemPage(this.driver);
     await itemPage.openPage(url);
+    await itemPage.onColorClick();
     await itemPage.onSizeClick();
-    await itemPage.onAddToBagClick();
-    const element = await itemPage.getProductName();
-    //assert.isTrue(element, "1");
+    //console.log('first test finished')
+    assert.equal(true, true);
+    
   });
 
-  // it("The item appears in the bag", async function() {
-  //   const itemPage = new ItemPage(this.driver);
-  //   await itemPage.openPage(url);
-  //   await itemPage.onSizeClick();
-  //   await itemPage.onAddToBagClick();
-  //   await itemPage.onBagClick();
-  //   const element = await itemPage.getProductName();
-  //   assert.assertEquals(element, "43199 NEEDLE PUNCHED REFLECTIVE ")
-  // }).timeout(2000);
+  it("The item appears in the bag", async function () {
+    //console.log('second test runned')
+     const itemPage = new ItemPage(this.driver);
+     await itemPage.openPage(url);
+     await itemPage.onColorClick();
+     await itemPage.onSizeClick();
+     //console.log('second test finished');
+     await itemPage.closeSidebar();
+     await itemPage.onAddToBagClick();
+     //await itemPage.onBagClick();
+     const element = await itemPage.getProductName();
+     assert.equal(element.toLowerCase(), "Expedition Pack Down Hoodie M".toLowerCase());
+   });
+
+   it("Item price matches", async function () {
+    //console.log('third test runned')
+     const itemPage = new ItemPage(this.driver);
+     await itemPage.openPage(url);
+     await itemPage.onColorClick();
+     await itemPage.onSizeClick();
+     //console.log('third test finished');
+     await itemPage.closeSidebar();
+     await itemPage.onAddToBagClick();
+     //await itemPage.onBagClick();
+     const element = await itemPage.getProductPrice();
+     console.log('text', element);
+     assert.equal(element.toLowerCase(), "319,95 €".toLowerCase());
+   });
 
   afterEach(async function () {
     await this.driver.quit();
   });
-
 });

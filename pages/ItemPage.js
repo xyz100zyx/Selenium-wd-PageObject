@@ -7,7 +7,7 @@ class ItemPage extends BasePage {
   }
 
   async onAddToBagClick() {
-    const element = await this.driver.findElement(By.className('addItemToShoppingBagButton'));
+    const element = await this.findByXpath(`//*[@id="add-to-cart-button"]`);
     await element.click();
     return this;
   }
@@ -19,21 +19,35 @@ class ItemPage extends BasePage {
   }
 
   async onSizeClick(){
-    const element = await this.findByXpath('//*[@id="sizeSelection-5_16115677su"]');
+    const element = await this.findByXpath('//*[@id="product-details"]/div/div/div[2]/div[1]/div[3]/div[2]/div[2]/button[2]');
     await element.click();
     return this;
   }
 
-  async getProductName(){
-    const element = await this.findByXpath(`//*[@id="minicartSection"]/div/section`);
-    return element.getText();
-    return element;
+  async onColorClick(){
+    const element = await this.findByXpath(`//*[@id="product-details"]/div/div/div[2]/div[1]/div[3]/div[1]/div/a[7]/span[2]/span[1]`);
+    await element.click()
+    return this;
   }
 
-  async getProductQuantity(){
-    const element = await this.findByXpath(`//*[@id="minicartSection"]/div/section/div[2]/div[2]/div[3]/span[2]`);
+  async getProductName(){
+    const element = await this.findByXpath(`//*[@id="product-details"]/div/div/div[2]/div[1]/div[2]/h1`);
     return element.getText();
   }
+
+  async getProductPrice(){
+    const element = await this.findByXpath(`//*[@id="mini-cart"]/div/dl/dd[3]`);
+    console.log(element.getText(), 'loooool')
+    return element.getText();
+  }
+
+  async closeSidebar(){
+    const element = await this.findByXpath(`/html/body/section/div/div/div[3]/div[2]/button[2]`);
+    await element.click();
+    console.log('element', element);
+    return this;
+  }
+
 }
 
 module.exports = ItemPage;
